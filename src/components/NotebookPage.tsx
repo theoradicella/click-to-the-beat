@@ -154,14 +154,34 @@ export default function NotebookPage() {
       }
     }
 
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.code !== 'Space') return
+      e.preventDefault()
+      const mouse = mouseRef.current
+      const x = mouse ? mouse.x : window.innerWidth / 2
+      const y = mouse ? mouse.y : window.innerHeight / 2
+      const cellX = Math.floor(x / CELL) * CELL
+      const cellY = Math.floor(y / CELL) * CELL
+      wavesRef.current.push({
+        originX: cellX + CELL / 2,
+        originY: cellY + CELL / 2,
+        startTime: performance.now(),
+      })
+      if (!rafRef.current) {
+        rafRef.current = requestAnimationFrame(draw)
+      }
+    }
+
     window.addEventListener('mousemove', onMouseMove)
     window.addEventListener('mouseleave', onMouseLeave)
     window.addEventListener('click', onClick)
+    window.addEventListener('keydown', onKeyDown)
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove)
       window.removeEventListener('mouseleave', onMouseLeave)
       window.removeEventListener('click', onClick)
+      window.removeEventListener('keydown', onKeyDown)
       resizeObserver.disconnect()
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }

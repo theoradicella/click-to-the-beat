@@ -28,6 +28,7 @@ interface Track {
 
 const RECOMMENDATIONS: Track[] = [
   { id: 'iXa844Xa_FQ', title: 'Live Is Life',  channel: 'Opus' },
+  { id: '9uMtnH7cABg', title: 'Xanadu',        channel: 'Ummet Ozcan' },
   { id: 'DtE0ZWkYPRs', title: 'Boss Bitch',    channel: 'Doja Cat' },
 ]
 
