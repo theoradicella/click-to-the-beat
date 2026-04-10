@@ -173,18 +173,8 @@ export default function MusicBar() {
   const search = async () => {
     const q = query.trim()
     if (!q) return
-    const key = import.meta.env.VITE_YT_API_KEY
-    if (!key) {
-      setResults([{ id: '', title: 'Add VITE_YT_API_KEY to .env.local', channel: '' }])
-      setOpen(true)
-      return
-    }
     try {
-      const url =
-        `https://www.googleapis.com/youtube/v3/search` +
-        `?part=snippet&type=video&videoCategoryId=10&maxResults=5` +
-        `&q=${encodeURIComponent(q)}&key=${key}`
-      const res = await fetch(url)
+      const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`)
       const data = await res.json()
       setResults(
         (data.items ?? []).map((item: any) => ({
