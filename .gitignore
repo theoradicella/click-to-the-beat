@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Environment variables (API keys)
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+
+# Vite
+vite.config.ts.timestamp-*
+
+# Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Claude Code local config
+.claude/
